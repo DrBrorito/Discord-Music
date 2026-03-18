@@ -68,17 +68,17 @@ async def rick(ctx):
     
 
 @bot.command()
-async def play(ctx, url):
+async def play(ctx, url):#all code broken here thx youtube
     if ctx.voice_client:
         await ctx.send(f'PLaying ur Music from {url}')
         
         info = ydl.extract_info(url, download=False)
         raw_url = info['url']
-        await ctx.voice_client.play(discord.FFmpegPCMAudio(url)) #It needs special link to work bru it no work
+        ctx.voice_client.play(discord.FFmpegPCMAudio(url)) #forgot about await
     else:
         await ctx.send(f'STILL CANT PLAY IF NOT INT CALL')
 
 
 
-bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.YUPHwJ92ne1Zlli2l48IHATEuF4BJdDOncZGGgDHB3E')
-client.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.IHA') #kinda useless lol
+bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.hidden')
+client.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.hidden') #kinda useless lol

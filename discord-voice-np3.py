@@ -1,5 +1,5 @@
-#bot music git broken, I hate git, git is broken, this is why I never git
-from concurrent.futures import wait
+#bot music git broken, I hate git, git is broken, this is why I never git, git is evil
+from concurrent.futures import waitn #I dont recall adding this
 
 import discord
 import yt_dlp
@@ -11,6 +11,8 @@ bot = commands.Bot(command_prefix ='!', intents=discord.Intents.all())
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
+
+
 #test command but not really command
 #Kinda useless still
 @client.event
@@ -55,9 +57,9 @@ async def disconnect(ctx):
 
 
 #start playing media
-@bot.command()
+@bot.command() #Do not touch works amazing, nvm going convert it to local files too long for the android vr player api json
 async def rick(ctx):
-    if ctx.voice_client:
+    if ctx.voice_client and not ctx.voice_client.is_playing():
         await ctx.send (f'Get ricked roll loser')
         url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #fetches the audio raw file
         info = ydl.extract_info(url, download=False) #creates the raw url
@@ -67,18 +69,21 @@ async def rick(ctx):
         await ctx.send(f'Do !join to have me join call first')
     
 
-@bot.command()
-async def play(ctx, url):#all code broken here thx youtube
-    if ctx.voice_client:
-        await ctx.send(f'PLaying ur Music from {url}')
-        
-        info = ydl.extract_info(url, download=False)
-        raw_url = info['url']
-        ctx.voice_client.play(discord.FFmpegPCMAudio(url)) #forgot about await
+@bot.command() #kinda working but cant hear the sound
+async def play(ctx, file):
+    if ctx.voice_client and not ctx.voice_client.is_playing():
+        await ctx.send(f'Playing ur local music from {file}')
+        ctx.voice_client.play(discord.FFmpegPCMAudio(file)) 
+    
     else:
-        await ctx.send(f'STILL CANT PLAY IF NOT INT CALL')
+       if not ctx.voice_client and ctx.voice_client.is_playing(): 
+            await ctx.send(f'Audio is playing and some how the bot isnt in a channel')      
+        else:
+            if not ctx.voice_client:
+                await ctx.send(f'Im not in a voice channel summon me by doing !join')
+            else:
+                await ctx.send(f'Audio is playing right now, try again when audio ia done playing')
 
 
-
-bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.hidden')
-client.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.hidden') #kinda useless lol
+bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA..YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E')
+client.run('.GZCJSQ.YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E') #kinda useless lol

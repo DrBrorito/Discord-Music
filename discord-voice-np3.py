@@ -1,7 +1,8 @@
 #bot music git broken, I hate git, git is broken, this is why I never git, git is evil
-from concurrent.futures import waitn #I dont recall adding this
+ #I dont recall adding this, cuz I didnt
 
 import discord
+import asyncio
 import yt_dlp
 from discord.ext import commands #setup commands 
 
@@ -61,29 +62,44 @@ async def disconnect(ctx):
 async def rick(ctx):
     if ctx.voice_client and not ctx.voice_client.is_playing():
         await ctx.send (f'Get ricked roll loser')
-        url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #fetches the audio raw file
-        info = ydl.extract_info(url, download=False) #creates the raw url
-        raw_url = info['url']
-        ctx.voice_client.play(discord.FFmpegPCMAudio(raw_url)) #plays raw url
+        file = "rick.mp3" #Updated to use an mp3 rather than YouTube
+        ctx.voice_client.play(discord.FFmpegPCMAudio(file)) #plays raw url
     else:
-        await ctx.send(f'Do !join to have me join call first')
+        await ctx.send(f'Do !join to have me join call first, or Im playing audio rightnow')
     
 
-@bot.command() #kinda working but cant hear the sound
+@bot.command() 
 async def play(ctx, file):
     if ctx.voice_client and not ctx.voice_client.is_playing():
         await ctx.send(f'Playing ur local music from {file}')
         ctx.voice_client.play(discord.FFmpegPCMAudio(file)) 
     
-    else:
-       if not ctx.voice_client and ctx.voice_client.is_playing(): 
-            await ctx.send(f'Audio is playing and some how the bot isnt in a channel')      
-        else:
-            if not ctx.voice_client:
-                await ctx.send(f'Im not in a voice channel summon me by doing !join')
-            else:
-                await ctx.send(f'Audio is playing right now, try again when audio ia done playing')
+    else: 
+        await ctx.send(f'Audio is playing and or the Bot is not in the call')      
+       
+
+@bot.command()
+async def stop(ctx):
+    if ctx.voice_client and ctx.voice_client.is_playing():
+        ctx.voice_client.stop()
+        await ctx.send(f'Stopped the Party')
 
 
-bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA..YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E')
-client.run('.GZCJSQ.YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E') #kinda useless lol
+@bot.command()
+async def helps(ctx):
+    
+    await ctx.send(f'To have Bot Join Voice channel do !Join')
+    asyncio.sleep(.2) #I really tried time.sleep, I am so stupid
+    await ctx.send(f'To have bot Leave voice channel do !disconnect')
+    asyncio.sleep(.2)
+    await ctx.send(f'To have bot Rick roll people do !rick')
+    asyncio.sleep(.2)
+    await ctx.send(f'To have bot play local files do !play <File Path>')
+    asyncio.sleep(.2)
+    await ctx.send(f'To have bot stop the music do !stop')
+    asyncio.sleep(.2)
+    await ctx.send(f'Do "!helps" if you need help with commands')
+
+
+bot.run('.GZCJSQ.YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E')
+client.run('MTQ4MzE5ODI3MTQy67OTAyMTc1OA.GZCJSQ.YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E') #kinda useless lol

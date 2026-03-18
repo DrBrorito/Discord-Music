@@ -1,6 +1,12 @@
-#bot music git broken, I hate git
+#bot music git broken, I hate git, git is broken, this is why I never git
+from concurrent.futures import wait
+
 import discord
+import yt_dlp
 from discord.ext import commands #setup commands 
+
+ydl = yt_dlp.YoutubeDL({'format': 'bestaudio', 'noplaylist': True}) #setups the downloader for music
+
 bot = commands.Bot(command_prefix ='!', intents=discord.Intents.all())
 intents = discord.Intents.default()
 intents.message_content = True
@@ -52,21 +58,27 @@ async def disconnect(ctx):
 @bot.command()
 async def rick(ctx):
     if ctx.voice_client:
-        ctx.voice_client.play(discord.FFmpegPCMAudio('https://www.youtube.com/watch?v=dQw4w9WgXcQ')) #It needs special link to work 
         await ctx.send (f'Get ricked roll loser')
-
-    
+        url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #fetches the audio raw file
+        info = ydl.extract_info(url, download=False) #creates the raw url
+        raw_url = info['url']
+        ctx.voice_client.play(discord.FFmpegPCMAudio(raw_url)) #plays raw url
     else:
         await ctx.send(f'Do !join to have me join call first')
     
 
-    @bot.command()
-    async def play(url):
-        if ctx.voice_client:
-            await ctx.voice_client.play(discord.FFmpegPCMAudio(url)) #It needs special link to work bru it no work
+@bot.command()
+async def play(ctx, url):
+    if ctx.voice_client:
+        await ctx.send(f'PLaying ur Music from {url}')
         
-            await ctx.send(f'Playing ur fav music from {url}')
-        else:
-            await ctx.send(f'STILL CANT PLAY IF NOT INT CALL')
-bot.run('TokeEn')
-client.run('token') #kinda useless lol
+        info = ydl.extract_info(url, download=False)
+        raw_url = info['url']
+        await ctx.voice_client.play(discord.FFmpegPCMAudio(url)) #It needs special link to work bru it no work
+    else:
+        await ctx.send(f'STILL CANT PLAY IF NOT INT CALL')
+
+
+
+bot.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.YUPHwJ92ne1Zlli2l48IHATEuF4BJdDOncZGGgDHB3E')
+client.run('MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.IHA') #kinda useless lol

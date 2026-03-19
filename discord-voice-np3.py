@@ -13,7 +13,36 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-    
+url = "https://discord.com/api/v10/applications/1483198271429021758/"
+json = {
+    "name": "Join",
+     "type": 1,
+     "description": "Joins a voice channel",
+     "options": [
+         {
+             "name": "channel",
+             "description": "Makesbot join a voice channel of your choice",
+             "type": 3,
+             "required": True,
+             "choices": [
+                 {"name": "Chating",
+                  "value": "1473797375003725907"
+                  },
+                  {"name": "Cookieness",
+                   "value": "1473076548822241424"
+                   },
+                   {"name": "AFK",
+                    "value": "1388978113308004436"
+                    }
+             ]
+         },
+     ]
+     headers = {
+         "Authorization": "Bot MTQ4MzE5ODI3MTQyOTAyMTc1OA.GZCJSQ.YUPHwJ92ne1Zlli2l48uF4BJdDOncZGGgDHB3E"
+     }
+     r = requests.post(url, headers=headers, json=json)
+ }    
+ #Tried adding slash commands, invil json error :(
 # Voice setup
 
 #Join code

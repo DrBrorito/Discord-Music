@@ -13,17 +13,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-async feg aitocomplete(
-    interaction: discord.Interaction,
-    vurrent: str,
-) list[app_commands.Choice[str]]
-data = ['Join', 'Discconect', 'rickroll', 'play', 'stop', 'helps']
-
-return [
-    app_commands.Choice(name=choice, value=choice)
-    for choice in data if current.lower() in choice.lower() ///got a problem
-]
-
+    
 # Voice setup
 
 #Join code

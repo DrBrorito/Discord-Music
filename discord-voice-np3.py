@@ -13,20 +13,16 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
+async feg aitocomplete(
+    interaction: discord.Interaction,
+    vurrent: str,
+) list[app_commands.Choice[str]]
+data = ['Join', 'Discconect', 'rickroll', 'play', 'stop', 'helps']
 
-#test command but not really command
-#Kinda useless still
-@client.event
-async def on_read():
-    print(f'We have logged in as {client.user}')
-
-@client.event 
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+return [
+    app_commands.Choice(name=choice, value=choice)
+    for choice in data if current.lower() in choice.lower() ///got a problem
+]
 
 # Voice setup
 
